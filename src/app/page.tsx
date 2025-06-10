@@ -123,7 +123,7 @@ export default function HomePage() {
   const isSpotReserved = (spot: ParkingSpotWithDetails, date: string) => {
     return spot.reservations.some(
       (reservation) =>
-        reservation.date.toISOString().split('T')[0] === date &&
+        new Date(reservation.date).toISOString().split('T')[0] === date &&
         !reservation.isCancelled
     );
   };
@@ -131,7 +131,7 @@ export default function HomePage() {
   const getReservationForSpot = (spot: ParkingSpotWithDetails, date: string) => {
     return spot.reservations.find(
       (reservation) =>
-        reservation.date.toISOString().split('T')[0] === date &&
+        new Date(reservation.date).toISOString().split('T')[0] === date &&
         !reservation.isCancelled
     );
   };

@@ -18,7 +18,7 @@ interface ParkingSpotListProps {
   onSpotUpdated: () => void;
 }
 
-export default function ParkingSpotList({ spots, users, onSpotUpdated }: ParkingSpotListProps) {
+export default function ParkingSpotList({ spots, onSpotUpdated }: ParkingSpotListProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

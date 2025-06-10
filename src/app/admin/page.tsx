@@ -1,6 +1,6 @@
 'use client';
 
-import { ParkingSpot, Role, User } from '@prisma/client';
+import { ParkingSpot, User } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -18,15 +18,8 @@ type ParkingSpotWithUser = ParkingSpot & {
   } | null;
 };
 
-type SessionUser = {
-  name?: string | null;
-  email?: string | null;
-  image?: string | null;
-  role: Role;
-};
-
 export default function AdminPage() {
-  const { data: session, status } = useSession();
+  const { data:  status } = useSession();
   const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
   const [parkingSpots, setParkingSpots] = useState<ParkingSpotWithUser[]>([]);

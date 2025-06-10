@@ -10,7 +10,7 @@ interface SessionUser {
 
 export async function PATCH(
   request: Request,
-  { params }: Promise<{ params: { id: string } }>
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
 

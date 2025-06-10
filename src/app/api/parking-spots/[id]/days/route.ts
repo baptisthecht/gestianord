@@ -5,7 +5,7 @@ import { authOptions } from '../../../auth/[...nextauth]/authOptions';
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: Promise<{ params: { id: string } }>
 ) {
   const session = await getServerSession(authOptions);
 

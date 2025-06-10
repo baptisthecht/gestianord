@@ -16,7 +16,7 @@ export async function DELETE(
   try {
     // Vérifier si l'utilisateur existe
     const user = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
 
     if (!user) {
@@ -30,7 +30,7 @@ export async function DELETE(
 
     // Supprimer l'utilisateur
     await prisma.user.delete({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
 
     return new NextResponse(null, { status: 204 });

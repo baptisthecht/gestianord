@@ -23,7 +23,7 @@ export async function PATCH(
 
     // Vérifier si la place existe
     const parkingSpot = await prisma.parkingSpot.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
 
     if (!parkingSpot) {
@@ -43,7 +43,7 @@ export async function PATCH(
 
     // Mettre à jour l'assignation
     const updatedSpot = await prisma.parkingSpot.update({
-      where: { id: params.id },
+      where: { id: (await params).id },
       data: {
         defaultUserId: userId || null,
       },

@@ -15,7 +15,7 @@ export async function POST(
 
   try {
     const { day } = await request.json();
-    const spotId = params.id;
+    const spotId =  (await params).id;
 
     // Vérifier si la place existe
     const spot = await prisma.parkingSpot.findUnique({

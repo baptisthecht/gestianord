@@ -15,7 +15,7 @@ export async function POST(
 
   try {
     const reservation = await prisma.reservation.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
       include: {
         user: true,
       },
@@ -39,7 +39,7 @@ export async function POST(
     }
 
     const updatedReservation = await prisma.reservation.update({
-      where: { id: params.id },
+      where: { id: (await params).id },
       data: {
         isCancelled: true,
       },

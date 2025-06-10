@@ -22,25 +22,32 @@ export async function PATCH(
 
     // Vérifier si la place existe
     const parkingSpot = await prisma.parkingSpot.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
 
     if (!parkingSpot) {
       return new NextResponse('Place de parking non trouvée', { status: 404 });
     }
 
-    // Mettre à jour la disponibilité du jour
-    const updatedSpot = await prisma.parkingSpot.update({
-      where: { id: params.id },
-      data: {
-        availableDays: {
-          ...parkingSpot.availableDays,
-          [day]: available,
+    // Créer ou supprimer la réservation pour ce jour
+    if (available) {
+      await prisma.reservation.create({
+        data: {
+          date: new Date(day),
+          spotId: (await params).id,
+          userId: session.user.id,
         },
-      },
-    });
+      });
+    } else {
+      await prisma.reservation.deleteMany({
+        where: {
+          spotId: (await params).id,
+          date: new Date(day),
+        },
+      });
+    }
 
-    return NextResponse.json(updatedSpot);
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Erreur lors de la mise à jour des jours disponibles:', error);
     return new NextResponse('Erreur serveur', { status: 500 });

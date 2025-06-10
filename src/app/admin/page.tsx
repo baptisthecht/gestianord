@@ -19,7 +19,7 @@ type ParkingSpotWithUser = ParkingSpot & {
 };
 
 export default function AdminPage() {
-  const { data:  status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
   const [parkingSpots, setParkingSpots] = useState<ParkingSpotWithUser[]>([]);

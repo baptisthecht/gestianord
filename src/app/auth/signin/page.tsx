@@ -29,7 +29,7 @@ export default function SignInPage() {
       }
 
       router.push('/admin');
-    } catch (err) {
+    } catch {
       setError('Une erreur est survenue');
     } finally {
       setLoading(false);

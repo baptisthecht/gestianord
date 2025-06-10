@@ -37,7 +37,7 @@ export async function GET() {
     });
 
     return NextResponse.json(users);
-  } catch (error) {
+  } catch  {
     return new NextResponse("Erreur serveur", { status: 500 });
   }
 }
@@ -83,7 +83,7 @@ export async function POST(request: Request) {
       ...user,
       plainPassword: password, // Le mot de passe en clair pour l'affichage initial
     });
-  } catch (error) {
+  } catch {
     return new NextResponse("Erreur serveur", { status: 500 });
   }
 } 
